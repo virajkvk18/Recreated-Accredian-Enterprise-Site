@@ -13,7 +13,17 @@ const questions = [
 ];
 
 function Button({ children = 'Enquire Now', onClick, light = false }) { return <button onClick={onClick} className={`button ${light ? 'light' : ''}`}>{children} <span>→</span></button>; }
-function SectionTitle({ eyebrow, title }) { return <div className="section-title">{eyebrow && <p>{eyebrow}</p>}<h2>{title}</h2></div>; }
+const subtitles = {
+  'THE NUMBERS BEHIND OUR SUCCESS': 'The Numbers Behind Our Success',
+  'SUCCESSFUL COLLABORATIONS WITH THE INDUSTRY’S BEST': 'Successful Collaborations With the Industry’s Best',
+  'KEY ASPECTS OF OUR STRATEGIC TRAINING': 'Key Aspects of Our Strategic Training',
+  'SPECIALIZED PROGRAMS DESIGNED TO FUEL INNOVATION': 'Specialized Programs Designed to Fuel Innovation',
+  'EXPLORE CUSTOM-FIT COURSES DESIGNED TO ADDRESS EVERY PROFESSIONAL FOCUS': 'Explore Custom-fit Courses Designed to Address Every Professional Focus',
+  'OUR PROVEN APPROACH TO LEARNING EXCELLENCE': 'Our Proven Approach to Learning Excellence',
+  'A STRUCTURED THREE-STEP APPROACH TO SKILL DEVELOPMENT': 'A Structured Three-Step Approach to Skill Development',
+  'WHAT OUR CLIENTS ARE SAYING': 'What Our Clients Are Saying'
+};
+function SectionTitle({ eyebrow, title }) { return <div className="section-title"><h2>{title}</h2>{eyebrow && <p>{subtitles[eyebrow] || eyebrow}</p>}</div>; }
 function LeadForm({ close }) {
  const [form,setForm]=useState({name:'',email:'',company:'',phone:''}); const [status,setStatus]=useState('');
  async function submit(e){e.preventDefault();setStatus('Sending…');const r=await fetch('/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(form)});const d=await r.json();setStatus(d.message||d.error);if(r.ok)setForm({name:'',email:'',company:'',phone:''});}

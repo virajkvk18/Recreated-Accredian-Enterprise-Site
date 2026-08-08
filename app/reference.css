@@ -34,6 +34,26 @@ nav a:first-child::after { content: ''; position: absolute; left: 0; right: 0; b
 .hero-photo::before { display: none; }
 .hero-photo img { position: absolute; width: auto; height: 100%; max-width: none; right: -4%; bottom: 0; animation: none; }
 
+/* Keep all content visible immediately, matching the reference page behaviour. */
+.reveal, .reveal.is-visible { opacity: 1; transform: none; }
+
+/* Track Record: reference uses a white section, blue value pills and light dividers. */
+.stats { background: #fff; color: #111; padding: 82px 8vw 92px; }
+.stats h2 { color: #111; }
+.stats .section-title { margin-bottom: 64px; }
+.stats .section-title p { color: #1d2939; font-size: 17px; font-weight: 500; letter-spacing: 0; margin: 12px 0 0; }
+.stat-grid { max-width: 1120px; }
+.stat-grid > div { padding: 8px 48px; border-color: #e4e4e4; }
+.stat-grid h2 { display: inline-block; margin: 0 0 22px; padding: 8px 24px; border-radius: 999px; background: #e8f1ff; color: #1976e8; font-size: 28px; }
+.stat-grid p { color: #111; font-size: 16px; line-height: 1.55; font-weight: 500; }
+
+/* Reduce the lower-page drift created by oversized card rows. */
+.domains { padding-top: 64px; padding-bottom: 64px; }
+.domain-grid article { min-height: 180px; padding: 22px; }
+.domain-grid h3 { margin-top: 18px; }
+.domain-grid p { margin-bottom: 10px; }
+.section-title > p { text-transform: none; letter-spacing: 0; font-size: 17px; font-weight: 500; color: #344054; margin: 12px 0 0; }
+
 @media (max-width: 850px) {
   header { height: 68px; padding: 0 20px; }
   nav { gap: 15px; font-size: 14px; }
@@ -42,4 +62,7 @@ nav a:first-child::after { content: ''; position: absolute; left: 0; right: 0; b
   .hero h1 { margin-bottom: 22px; }
   .hero-photo { height: auto; min-height: 250px; width: 100%; }
   .hero-photo img { width: 112%; height: auto; right: -6%; }
+  .stats { padding: 58px 20px; }
+  .stats .section-title { margin-bottom: 36px; }
+  .stat-grid h2 { margin-bottom: 10px; }
 }
