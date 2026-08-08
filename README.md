@@ -1,29 +1,106 @@
-# Accredian Enterprise Recreation
+# Accredian Enterprise Website Recreation
 
-A responsive Next.js recreation of the Accredian Enterprise landing page, built from the public reference at https://enterprise.accredian.com/.
+A responsive, production-deployed recreation of the [Accredian Enterprise](https://enterprise.accredian.com/) landing page, built with Next.js and React.
 
-## Setup
+## Live Demo
 
-1. Install Node.js 18.17 or newer.
-2. Run `npm install`.
-3. Run `npm run dev` and open http://localhost:3000.
-4. Run `npm run build` to create a production build. The app is ready to deploy by importing this folder in Vercel.
+**[View the live website →](https://accredian-alpha-five.vercel.app)**
+
+## Highlights
+
+- Complete enterprise landing page covering every major reference section
+- Responsive experience for desktop, tablet, and mobile devices
+- Sticky navigation with smooth section scrolling and a mobile menu
+- Interactive FAQ accordion and polished hover/transition states
+- Lead-capture modal with client-side validation
+- Next.js API route for receiving and validating lead submissions
+- Production deployment through Vercel
+
+## Sections Included
+
+- Hero and primary call-to-action
+- Achievement statistics and client partnerships
+- Accredian Edge and CAT Framework visuals
+- Domain expertise and tailored course segmentation
+- Audience / learner profile section
+- Three-step delivery process
+- FAQs, partner testimonials, closing CTA, and footer
+
+## Technology Stack
+
+| Area | Technology |
+| --- | --- |
+| Framework | Next.js 16 (App Router) |
+| UI | React 19 functional components and hooks |
+| Styling | Custom responsive CSS |
+| API | Next.js Route Handlers |
+| Deployment | Vercel |
+
+## Project Structure
+
+```text
+app/
+├── api/leads/route.js    # Lead capture API endpoint
+├── globals.css           # Responsive global styles
+├── layout.jsx            # App metadata and root layout
+└── page.jsx              # Landing page and reusable UI components
+```
+
+## Run Locally
+
+### Prerequisites
+
+- Node.js 20.9 or newer
+- npm
+
+### Setup
+
+```bash
+git clone https://github.com/virajkvk18/Recreated-Accredian-Enterprise-Site.git
+cd Recreated-Accredian-Enterprise-Site
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Production Build
+
+```bash
+npm run build
+npm start
+```
+
+## Lead Capture API
+
+The enquiry form submits data to `POST /api/leads`.
+
+Required fields:
+
+- Full name
+- Work email
+- Company name
+
+For this assignment, leads are stored in a temporary in-memory collection. `GET /api/leads` is also available for local API verification. A production implementation should replace this with a secure persistent database.
 
 ## Approach
 
-- Used Next.js App Router with one composed landing page and small reusable components for buttons, section titles, header and lead form.
-- Matched the reference information architecture: hero, stats, partners, Accredian Edge, domains, segments, audience, CAT framework, delivery process, FAQs, testimonials, call-to-action and footer.
-- Used responsive CSS breakpoints for tablet and mobile layouts.
-- Reused publicly served Accredian image assets for visual fidelity.
-- Added a client-side modal lead form that validates required fields and posts to `POST /api/leads`. The route keeps submissions in a runtime in-memory mock store, and `GET /api/leads` returns them for local testing.
+The page is composed from small reusable React components, including the header, buttons, section titles, and lead form. Content-heavy areas such as domain cards, course segments, FAQs, learner groups, and testimonials are data-driven to keep the UI consistent and easy to maintain.
 
-## AI usage
+The visual system uses a blue-and-white enterprise theme, responsive CSS grids, breakpoint-specific layouts, semantic HTML, and smooth in-page navigation. Publicly available image assets from the reference were used to achieve closer visual fidelity.
 
-AI assisted with the component structure, responsive styles, content composition and API route. The reference website was inspected to identify its publicly visible layout, section names and asset URLs. The implementation was then authored and reviewed locally.
+## AI Usage
 
-## With more time
+AI assisted with the initial component planning, responsive styling direction, content organization, and debugging workflow. The final implementation was manually reviewed, refined, tested across desktop and mobile layouts, built for production, and deployed through Vercel.
 
-- Persist leads in a managed database (for example Vercel Postgres) and add spam protection.
-- Add automated unit, accessibility and end-to-end tests.
-- Implement carousel interactions and animation details from the source site.
-- Further refine pixel-level spacing and interaction states across device sizes.
+## Future Improvements
+
+- Persist submitted leads in a managed database such as Vercel Postgres
+- Add CAPTCHA / rate limiting for form protection
+- Add automated accessibility, unit, and end-to-end tests
+- Add more nuanced page animations and carousel behaviour
+- Further optimize images and refine pixel-level visual matching
+
+## Author
+
+Built by [Viraj Kumar Vishwakarma](https://github.com/virajkvk18)
