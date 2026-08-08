@@ -32,7 +32,7 @@ nav a:first-child::after { content: ''; position: absolute; left: 0; right: 0; b
 .hero ul li::first-letter { color: #22aa63; }
 .hero-photo { height: 100%; align-self: end; }
 .hero-photo::before { display: none; }
-.hero-photo img { position: absolute; width: 124%; max-width: none; right: -10%; bottom: 0; animation: none; }
+.hero-photo img { position: absolute; width: auto; height: 100%; max-width: none; right: -4%; bottom: 0; animation: none; }
 
 @media (max-width: 850px) {
   header { height: 68px; padding: 0 20px; }
@@ -41,5 +41,5 @@ nav a:first-child::after { content: ''; position: absolute; left: 0; right: 0; b
   .hero { height: auto; margin: 22px 14px 54px; padding: 42px 25px 0; }
   .hero h1 { margin-bottom: 22px; }
   .hero-photo { height: auto; min-height: 250px; width: 100%; }
-  .hero-photo img { width: 112%; right: -6%; }
+  .hero-photo img { width: 112%; height: auto; right: -6%; }
 }
