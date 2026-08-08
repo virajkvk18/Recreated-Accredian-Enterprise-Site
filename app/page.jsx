@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const asset = 'https://storage.googleapis.com/accredian-assets/Frontend_Assests/Images/Accredian-react-site-images/other/';
 const nav = [['Home','home'],['Stats','stats'],['Clients','clients'],['Accredian Edge','edge'],['CAT','cat'],['How It Works','how'],['FAQs','faqs'],['Testimonials','testimonials']];
@@ -20,9 +20,29 @@ function LeadForm({ close }) {
  return <div className="modal-backdrop" onClick={close}><form className="lead-form" onSubmit={submit} onClick={e=>e.stopPropagation()}><button type="button" className="close" onClick={close}>×</button><p className="kicker">LET’S TALK</p><h2>Build your team’s edge</h2><p>Tell us about your learning needs and an advisor will get in touch.</p>{[['name','Full name'],['email','Work email'],['company','Company name'],['phone','Phone number (optional)']].map(([key,label])=><label key={key}>{label}<input required={key!=='phone'} type={key==='email'?'email':'text'} value={form[key]} onChange={e=>setForm({...form,[key]:e.target.value})}/></label>)}<Button>Submit enquiry</Button>{status&&<small>{status}</small>}</form></div>;
 }
 function Header({ open }) { const [menu,setMenu]=useState(false); return <header><a href="#home"><img src={asset+'logo.webp'} alt="Accredian"/></a><nav className={menu?'open':''}>{nav.map(([n,id])=><a onClick={()=>setMenu(false)} href={`#${id}`} key={id}>{n}</a>)}</nav><Button onClick={open}/><button className="menu" onClick={()=>setMenu(!menu)}>☰</button></header>; }
-export default function Home(){ const [showForm,setShowForm]=useState(false); const [open,setOpen]=useState(null); return <main>
- <Header open={()=>setShowForm(true)}/>
- <section id="home" className="hero"><div className="hero-copy"><p className="kicker">ENTERPRISE LEARNING SOLUTIONS</p><h1>Next-Gen Expertise for <em>Your Enterprise</em></h1><p className="hero-text">Cultivate high-performance teams through expert learning.</p><ul>{['Tailored Solutions','Industry Insights','Expert Guidance'].map(x=><li key={x}>✓ {x}</li>)}</ul><Button onClick={()=>setShowForm(true)}/></div><div className="hero-photo"><img src={asset+'corporate-big-hero-v4.webp'} alt="Corporate learning session"/></div></section>
+function ReferenceHeader() {
+ const [menu,setMenu]=useState(false);
+ return <header><a href="#home"><img src={asset+'logo.webp'} alt="Accredian"/></a><nav className={menu?'open':''}>{nav.map(([n,id])=><a onClick={()=>setMenu(false)} href={`#${id}`} key={id}>{n}</a>)}</nav><button className="menu" aria-label="Toggle navigation" onClick={()=>setMenu(!menu)}>☰</button></header>;
+}
+
+export default function Home(){
+ const [showForm,setShowForm]=useState(false); const [open,setOpen]=useState(null);
+ useEffect(() => {
+   const sections = document.querySelectorAll('main > section:not(.hero)');
+   const observer = new IntersectionObserver((entries) => {
+     entries.forEach((entry) => {
+       if (entry.isIntersecting) {
+         entry.target.classList.add('is-visible');
+         observer.unobserve(entry.target);
+       }
+     });
+   }, { threshold: 0.12 });
+   sections.forEach((section) => { section.classList.add('reveal'); observer.observe(section); });
+   return () => observer.disconnect();
+ }, []);
+ return <main>
+ <ReferenceHeader />
+ <section id="home" className="hero"><div className="hero-copy"><h1>Next-Gen <em>Expertise</em><br/>For Your <em>Enterprise</em></h1><p className="hero-text">Cultivate high-performance<br/> teams through expert learning.</p><ul>{['Tailored Solutions','Industry Insights','Expert Guidance'].map(x=><li key={x}>✓ {x}</li>)}</ul><Button onClick={()=>setShowForm(true)}/></div><div className="hero-photo"><img src={asset+'corporate-big-hero-v4.webp'} alt="Corporate learning session"/></div></section>
  <section id="stats" className="stats"><SectionTitle eyebrow="THE NUMBERS BEHIND OUR SUCCESS" title="Our Track Record"/><div className="stat-grid">{[['10K+','Professionals trained for exceptional career success'],['200+','Sessions delivered with unmatched learning excellence'],['5K+','Active learners engaged in dynamic courses']].map(([n,t])=><div key={n}><h2>{n}</h2><p>{t}</p></div>)}</div></section>
  <section id="clients" className="clients"><SectionTitle eyebrow="SUCCESSFUL COLLABORATIONS WITH THE INDUSTRY’S BEST" title="Our Proven Partnerships"/><div className="logo-row">{['rel.png','hcl.png','ibm.png','crif.png','adp.svg','bayer.svg'].map(x=><img key={x} src={asset+x} alt="Client partner"/>)}</div></section>
  <section id="edge" className="edge"><SectionTitle eyebrow="KEY ASPECTS OF OUR STRATEGIC TRAINING" title="The Accredian Edge"/><img src={asset+'accredian-edge-usp-v3.svg'} alt="The Accredian Edge"/></section>
